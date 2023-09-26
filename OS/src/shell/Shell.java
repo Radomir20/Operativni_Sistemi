@@ -343,19 +343,24 @@ public class Shell {
 	// cuva vrijednost programskog brojaca i registara procesa koji je prekinut od
 	// strane rasporedjivaca
 	public static void saveValues() {
-		int[] registers = { Operations.R1.value, Operations.R2.value, Operations.R3.value, Operations.R4.value };
+		int[] registers = {
+			Operations.getRegister(0).value,
+			Operations.getRegister(1).value,
+			Operations.getRegister(2).value,
+			Operations.getRegister(3).value
+		};
 		currentlyExecuting.setValuesOfRegisters(registers);
-		currentlyExecuting.setPcValue(PC);
+		currentlyExecuting.setPcValue(Shell.PC);
 	}
 
 	// ucitava zapamcene vrijednosti kako bi proces nastavio izvrsavanje kao da
 	// prekida nije ni bilo
 	public static void loadValues() {
 		int[] registers = currentlyExecuting.getValuesOfRegisters();
-		Operations.R1.value = registers[0];
-		Operations.R2.value = registers[1];
-		Operations.R3.value = registers[2];
-		Operations.R4.value = registers[3];
-		PC = currentlyExecuting.getPcValue();
+		Operations.setRegister(0, registers[0]); // Postavi vrijednost R1 registra
+		Operations.setRegister(1, registers[1]); // Postavi vrijednost R2 registra
+		Operations.setRegister(2, registers[2]); // Postavi vrijednost R3 registra
+		Operations.setRegister(3, registers[3]); // Postavi vrijednost R4 registra
+		Shell.PC = currentlyExecuting.getPcValue();
 	}
 }

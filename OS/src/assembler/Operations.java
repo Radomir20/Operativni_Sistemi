@@ -50,7 +50,7 @@ public class Operations {
 	public static void load(String reg, String adr) {
 		Register r = getRegister(reg);
 		if (r != null) {
-			if (!Ram.isOcupied(Integer.parseInt(adr, 2)))
+			if (!Ram.isOccupied(Integer.parseInt(adr, 2)))
 				r.value = Ram.getAt(Integer.parseInt(adr, 2));
 		}
 	}

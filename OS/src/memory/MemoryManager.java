@@ -7,7 +7,8 @@ import kernel.Process;
 import kernel.ProcessState;
 
 public class MemoryManager {
-    public static ArrayList<PartitionMemory> partitionsInRam;
+
+	public static ArrayList<PartitionMemory> partitionsInRam;
 
 	public MemoryManager() {
 		Ram.initialize();
@@ -46,7 +47,7 @@ public class MemoryManager {
 	public int[] readRam(int start, int size) {
 		int[] data = new int[size];
 		for (int i = 0; i < data.length; i++) {
-			if (Ram.isOcupied(i + start)) {
+			if (Ram.isOccupied(i + start)) {
 				data[i] = Ram.getAt(i + start);
 			}
 		}
@@ -77,7 +78,7 @@ public class MemoryManager {
 		int bestPosition = -1, bestFitSize = Integer.MAX_VALUE;
 		int currentPosition = -1, currentSize = 0;
 		for (int i = 0; i < Ram.getCapacity(); i++) {
-			if (Ram.isOcupied(i) && currentSize != 0)// ako poslije praznih naidje na zauzeto
+			if (Ram.isOccupied(i) && currentSize != 0)// ako poslije praznih naidje na zauzeto
 			{
 				if (currentSize >= size && currentSize < bestFitSize)// ako je najbolje do sad
 				{
@@ -86,11 +87,11 @@ public class MemoryManager {
 				}
 				currentPosition = -1;
 				currentSize = 0;
-			} else if (!Ram.isOcupied(i) && currentSize == 0) // kad naidje na prvo slobodno poslije zauzetih
+			} else if (!Ram.isOccupied(i) && currentSize == 0) // kad naidje na prvo slobodno poslije zauzetih
 			{
 				currentPosition = i;
 				currentSize = 1;
-			} else if (!Ram.isOcupied(i) && currentSize != 0)// broji slobodna mjesta
+			} else if (!Ram.isOccupied(i) && currentSize != 0)// broji slobodna mjesta
 			{
 				currentSize++;
 			}
@@ -135,11 +136,11 @@ public class MemoryManager {
 		int freePosition = -1;
 		boolean avaliablePosition = false;
 		for (int i = 0; i < Ram.getCapacity(); i++) {
-			if (!Ram.isOcupied(i) && !avaliablePosition)// pronalazi prvu slobodnu poziciju
+			if (!Ram.isOccupied(i) && !avaliablePosition)// pronalazi prvu slobodnu poziciju
 			{
 				freePosition = i;
 				avaliablePosition = true;
-			} else if (Ram.isOcupied(i) && avaliablePosition)// prva zauzeta pozicija poslije slobodnih
+			} else if (Ram.isOccupied(i) && avaliablePosition)// prva zauzeta pozicija poslije slobodnih
 			{
 				PartitionMemory partition = PartitionMemory.getPartitionByAddress(i);// pronalazi particiju na poziciji
 																						// i

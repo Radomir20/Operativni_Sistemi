@@ -2,95 +2,97 @@ package memory;
 
 public class Ram {
 
-	private static final int CAPACITY = 128;
-	private static int[] ram = new int[CAPACITY];
-	private static int occupied = 0;
+    private static final int CAPACITY = 128;
+    private static final int EMPTY_CELL = -1;
+    private static int[] ram = new int[CAPACITY];
+    private static int occupied = 0;
 
-	public static void initialize() {
-		for (int i = 0; i < CAPACITY; i++) {
-			ram[i] = -1;
-		}
-	}
+    // Privatni konstruktor za onemogućavanje instanciranja klase
+    private Ram() {
+        // Privatni konstruktor onemogućuje instanciranje klase.
+    }
 
-	public static boolean setAt(int index, int value) {
-		if (isOcupied(index))
-			return false;
-		ram[index] = value;
-		occupied++;
-		return true;
-	}
+    public static void initialize() {
+        // Inicijaliziraj sve ćelije na EMPTY_CELL
+        Arrays.fill(ram, EMPTY_CELL);
+    }
 
-	public static boolean removeSequence(int start, int size) {
-		if (size + start > CAPACITY)
-			return false;
-		for (int i = start; i < size + start; i++) {
-			if (isOcupied(i)) {
-				ram[i] = -1;
-				occupied--;
-			} else {
-				return false;
-			}
-		}
-		return true;
-	}
+    public static boolean setAt(int index, int value) {
+        if (isOccupied(index))
+            return false;
+        ram[index] = value;
+        occupied++;
+        return true;
+    }
 
-	public static boolean setSequence(int start, int[] data) {
-		if (start + data.length > CAPACITY)
-			return false;
-		for (int i = start; i < data.length + start; i++) {
-			if (!isOcupied(i)) {
-				setAt(i, data[i - start]);
-			} else
-				return false;
-		}
-		return true;
-	}
+    public static boolean removeSequence(int start, int size) {
+        if (size + start > CAPACITY)
+            return false;
 
-	public static int getAt(int i) {
-		return ram[i];
-	}
+        long nonEmptyCount = Arrays.stream(ram, start, start + size).filter(val -> val != EMPTY_CELL).count();
 
-	public static boolean removeAt(int i) {
-		if (isOcupied(i)) {
-			ram[i] = -1;
-			occupied--;
-			return true;
-		}
-		return false;
-	}
+        if (nonEmptyCount == 0) {
+            Arrays.fill(ram, start, start + size, EMPTY_CELL);
+            occupied -= size;
+            return true;
+        }
 
-	public static void printRAM() {
-		if (occupied == 0)
-			System.out.println("RAM memory isnt occupied");
-		else {
-			System.out.print("RAM memory:");
-			for (int i = CAPACITY - 1; i >= 0; i--) {
-				if (isOcupied(i)) {
-					for (int j = 0; j <= i; j++) {
-						if (j % 10 == 0)
-							System.out.println();
-						System.out.print(ram[j] + "\t");
-					}
-					System.out.println();
-					break;
-				}
-			}
-		}
-	}
+        return false;
+    }
 
-	public static boolean isOcupied(int i) {
-		return ram[i] != -1;
-	}
+    public static boolean setSequence(int start, int[] data) {
+        if (start + data.length > CAPACITY)
+            return false;
+        for (int i = start; i < data.length + start; i++) {
+            if (!isOccupied(i)) {
+                setAt(i, data[i - start]);
+            } else
+                return false;
+        }
+        return true;
+    }
 
-	public static int getOccupiedSpace() {
-		return occupied;
-	}
+    public static int getAt(int i) {
+        return ram[i];
+    }
 
-	public static int getFreeSpace() {
-		return CAPACITY - occupied;
-	}
+    public static boolean removeAt(int i) {
+        if (isOccupied(i)) {
+            ram[i] = EMPTY_CELL;
+            occupied--;
+            return true;
+        }
+        return false;
+    }
 
-	public static int getCapacity() {
-		return CAPACITY;
-	}
-}
+    public static void printRAM() {
+        if (occupied == 0)
+            System.out.println("RAM memory isn't occupied");
+        else {
+            System.out.println("RAM memory:");
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < CAPACITY; i++) {
+                sb.append(ram[i]).append("\t");
+                if ((i + 1) % 10 == 0) {
+                    sb.append("\n");
+                }
+            }
+            System.out.println(sb.toString());
+        }
+    }
+
+    public static boolean isOccupied(int i) {
+        return ram[i] != EMPTY_CELL;
+    }
+
+    public static int getOccupiedSpace() {
+        return occupied;
+    }
+
+    public static int getFreeSpace() {
+        return CAPACITY - occupied;
+    }
+
+    public static int getCapacity() {
+        return CAPACITY;
+    }

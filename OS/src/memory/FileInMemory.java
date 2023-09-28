@@ -17,18 +17,24 @@ public class FileInMemory {
 
 	public static byte[] part(int index) {
 		byte[] part = new byte[Block.getSize()];
-		int counter = 0;
-		for (int i = index * Block.getSize(); i < contentFile.length; i++) {
-			part[counter] = contentFile[i];
-			if (counter == Block.getSize() - 1)
-				break;
-			counter++;
+
+		// Provjerite ispravnost indeksa
+		if (index < 0 || index >= contentFile.length / Block.getSize()) {
+			return part;
 		}
-		while (counter < Block.getSize() - 1) {
-			byte[] b = " ".getBytes();
-			part[counter] = b[0];
-			counter++;
+
+		int startIndex = index * Block.getSize();
+		int endIndex = startIndex + Block.getSize();
+
+		for (int i = startIndex; i < endIndex; i++) {
+			if (i < contentFile.length) {
+				part[i - startIndex] = contentFile[i];
+			} else {
+				// Ako smo došli do kraja datoteke, popunite ostatke s praznim znakovima
+				part[i - startIndex] = (byte) ' ';
+			}
 		}
+
 		return part;
 	}
 

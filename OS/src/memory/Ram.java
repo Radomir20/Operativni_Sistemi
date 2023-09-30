@@ -1,5 +1,7 @@
 package memory;
 
+import java.util.Arrays;
+
 public class Ram {
 
     private static final int CAPACITY = 128;
@@ -96,3 +98,4 @@ public class Ram {
     public static int getCapacity() {
         return CAPACITY;
     }
+}

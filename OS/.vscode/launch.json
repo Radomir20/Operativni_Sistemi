@@ -6,17 +6,17 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Current File",
+            "name": "GUI",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "shell.GUI",
+            "vmArgs": "--module-path ./javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml",
+            "projectName": "OS_779f652a"
         },
         {
             "type": "java",
-            "name": "App",
+            "name": "Current File",
             "request": "launch",
-            "mainClass": "App",
-            "vmArgs": "--module-path ./javafx-sdk-21/lib --add-modules javafx.controls,javafx.fxml",
-            "projectName": "OS_779f652a"
+            "mainClass": "${file}"
         }
     ]
 }

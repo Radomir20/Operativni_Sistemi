@@ -197,7 +197,7 @@ public class ShellCommands {
         System.setOut(new PrintStream(out, true));
     }
 
-    private static void errorWithParameters() {
+    static void errorWithParameters() {
         String s = "Parameters for command are incorrect!\n";
         System.out.println(s);
     }

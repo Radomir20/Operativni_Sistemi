@@ -353,8 +353,6 @@ public class Shell {
 		currentlyExecuting.setPcValue(Shell.PC);
 	}
 
-	// ucitava zapamcene vrijednosti kako bi proces nastavio izvrsavanje kao da
-	// prekida nije ni bilo
 	public static void loadValues() {
 		int[] registers = currentlyExecuting.getValuesOfRegisters();
 		Operations.R1.value = registers[0];

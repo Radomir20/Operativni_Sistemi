@@ -72,18 +72,20 @@ public class FileSystem {
 	}
 
 	public static void changeDirectory(String directory) {
-		if (directory.equals("..") && !currentFolder.equals(rootFolder))
+		if (directory.equals("..") && !currentFolder.equals(rootFolder)) {
 			currentFolder = currentFolder.getParentFile();
-		else {
+		} else {
 			for (TreeItem<File> file : Shell.tree.getTreeItem().getChildren()) {
-				if (file.getValue().getName().equals(directory) && file.getValue().isDirectory())
-					currentFolder = file.getValue();
+				if (file.getValue().getName().equals(directory) &&
+						file.getValue().isDirectory()) {
+					currentFolder = new File(currentFolder, directory);
+				}
 			}
 		}
 	}
 
 	public static void makeDirectory(String directory) {
-		File folder = new File(currentFolder.getAbsolutePath() + "\\" + directory);
+		File folder = new File(currentFolder + "\\" + directory);
 		if (!folder.exists()) {
 			folder.mkdir();
 		}

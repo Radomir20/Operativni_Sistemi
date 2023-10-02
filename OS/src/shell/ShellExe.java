@@ -62,19 +62,37 @@ public class ShellExe {
     }
 
     public static void trm(String par) {
+        try {
+			Integer.parseInt(par);
+		} catch (NumberFormatException e) {
+			ShellCommands.errorWithParameters();
+			return;
+		}
         ProcessScheduler.terminateProcess(Integer.parseInt(par));
     }
 
     public static void block(String par) {
+        try {
+			Integer.parseInt(par);
+		} catch (NumberFormatException e) {
+			ShellCommands.errorWithParameters();
+			return;
+		}
         ProcessScheduler.blockProcess(Integer.parseInt(par));
     }
 
     public static void unblock(String par) {
+        try {
+			Integer.parseInt(par);
+		} catch (NumberFormatException e) {
+			ShellCommands.errorWithParameters();
+			return;
+		}
         ProcessScheduler.unblockProcess(Integer.parseInt(par));
     }
 
     public static void clear() {
-        //GUI.clearTerminal();
+        GUI.clearTerminal();
     }
 
     public static void help() {

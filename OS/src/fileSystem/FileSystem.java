@@ -109,7 +109,7 @@ public class FileSystem {
 		try {
 			newFile.createNewFile();
 			FileWriter fw = new FileWriter(newFile);
-			fw.write("Rezultat izvrsavanja: " + Operations.getRegister(3).value);
+			fw.write("Rezultat izvrsavanja: " + Operations.R4.value);
 			fw.close();
 		} catch (IOException e) {
 			System.out.println("Error while creating file");

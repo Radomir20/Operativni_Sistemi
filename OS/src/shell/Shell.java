@@ -34,48 +34,48 @@ public class Shell {
 
 		// prevodjenje operacije
 		switch (arr[0]) {
-		case "MOV":
-			instruction += Operations.mov;
-			break;
-		case "HALT":
-			instruction += Operations.halt;
-			break;
-		case "STORE":
-			instruction += Operations.store;
-			break;
-		case "ADD":
-			instruction += Operations.add;
-			break;
-		case "SUB":
-			instruction += Operations.sub;
-			break;
-		case "MUL":
-			instruction += Operations.mul;
-			break;
-		case "JMP":
-			instruction += Operations.jmp;
-			break;
-		case "JMPL":
-			instruction += Operations.jmpl;
-			break;
-		case "JMPG":
-			instruction += Operations.jmpg;
-			break;
-		case "JMPE":
-			instruction += Operations.jmpe;
-			break;
-		case "JMPD":
-			instruction += Operations.jmpd;
-			break;
-		case "INC":
-			instruction += Operations.inc;
-			break;
-		case "DEC":
-			instruction += Operations.dec;
-			break;
-		case "LOAD":
-			instruction += Operations.load;
-			break;
+			case "MOV":
+				instruction += Operations.mov;
+				break;
+			case "HALT":
+				instruction += Operations.halt;
+				break;
+			case "STORE":
+				instruction += Operations.store;
+				break;
+			case "ADD":
+				instruction += Operations.add;
+				break;
+			case "SUB":
+				instruction += Operations.sub;
+				break;
+			case "MUL":
+				instruction += Operations.mul;
+				break;
+			case "JMP":
+				instruction += Operations.jmp;
+				break;
+			case "JMPL":
+				instruction += Operations.jmpl;
+				break;
+			case "JMPG":
+				instruction += Operations.jmpg;
+				break;
+			case "JMPE":
+				instruction += Operations.jmpe;
+				break;
+			case "JMPD":
+				instruction += Operations.jmpd;
+				break;
+			case "INC":
+				instruction += Operations.inc;
+				break;
+			case "DEC":
+				instruction += Operations.dec;
+				break;
+			case "LOAD":
+				instruction += Operations.load;
+				break;
 		}
 
 		if (arr[0].equals("HALT")) {
@@ -87,23 +87,6 @@ public class Shell {
 																														// JMPL
 			// R1,1(value),6(adr)
 			switch (arr[1]) { // +registar
-			case "R1":
-				instruction += Constants.R1;
-				break;
-			case "R2":
-				instruction += Constants.R2;
-				break;
-			case "R3":
-				instruction += Constants.R3;
-				break;
-			case "R4":
-				instruction += Constants.R4;
-				break;
-			}
-			if (!arr[2].equals("R1") && !arr[2].equals("R2") && !arr[2].equals("R3") && !arr[2].equals("R4")) {
-				instruction += toBinary(arr[2]); // +vrijendost
-			} else {
-				switch (arr[2]) { // +registar
 				case "R1":
 					instruction += Constants.R1;
 					break;
@@ -116,71 +99,88 @@ public class Shell {
 				case "R4":
 					instruction += Constants.R4;
 					break;
+			}
+			if (!arr[2].equals("R1") && !arr[2].equals("R2") && !arr[2].equals("R3") && !arr[2].equals("R4")) {
+				instruction += toBinary(arr[2]); // +vrijendost
+			} else {
+				switch (arr[2]) { // +registar
+					case "R1":
+						instruction += Constants.R1;
+						break;
+					case "R2":
+						instruction += Constants.R2;
+						break;
+					case "R3":
+						instruction += Constants.R3;
+						break;
+					case "R4":
+						instruction += Constants.R4;
+						break;
 				}
 			}
 			instruction += toBinary(arr[3]); // +adresa
 			return instruction;
 		} else if (arr[0].equals("INC") || arr[0].equals("DEC")) {
 			switch (arr[1]) { // +registar
-			case "R1":
-				instruction += Constants.R1;
-				break;
-			case "R2":
-				instruction += Constants.R2;
-				break;
-			case "R3":
-				instruction += Constants.R3;
-				break;
-			case "R4":
-				instruction += Constants.R4;
-				break;
+				case "R1":
+					instruction += Constants.R1;
+					break;
+				case "R2":
+					instruction += Constants.R2;
+					break;
+				case "R3":
+					instruction += Constants.R3;
+					break;
+				case "R4":
+					instruction += Constants.R4;
+					break;
 			}
 			return instruction;
 		} else if (arr[2].equals("R1") || arr[2].equals("R2") || arr[2].equals("R3") || arr[2].equals("R4")
 				|| arr[2].equals("R5")) { // ako su oba argumenta registri (MOV,ADD,SUB,MUL)
 			switch (arr[1]) {
-			case "R1":
-				instruction += Constants.R1;
-				break;
-			case "R2":
-				instruction += Constants.R2;
-				break;
-			case "R3":
-				instruction += Constants.R3;
-				break;
-			case "R4":
-				instruction += Constants.R4;
-				break;
+				case "R1":
+					instruction += Constants.R1;
+					break;
+				case "R2":
+					instruction += Constants.R2;
+					break;
+				case "R3":
+					instruction += Constants.R3;
+					break;
+				case "R4":
+					instruction += Constants.R4;
+					break;
 			}
 			switch (arr[2]) {
-			case "R1":
-				instruction += Constants.R1;
-				break;
-			case "R2":
-				instruction += Constants.R2;
-				break;
-			case "R3":
-				instruction += Constants.R3;
-				break;
-			case "R4":
-				instruction += Constants.R4;
-				break;
+				case "R1":
+					instruction += Constants.R1;
+					break;
+				case "R2":
+					instruction += Constants.R2;
+					break;
+				case "R3":
+					instruction += Constants.R3;
+					break;
+				case "R4":
+					instruction += Constants.R4;
+					break;
 			}
 			return instruction;
 		} else {
 			switch (arr[1]) { // +registar
-			case "R1":
-				instruction += Constants.R1;
-				break;
-			case "R2":
-				instruction += Constants.R2;
-				break;
-			case "R3":
-				instruction += Constants.R3;
-				break;
-			case "R4":
-				instruction += Constants.R4;
-				break;
+				case "R1":
+					instruction += Constants.R1;
+					break;
+				case "R2":
+					instruction += Constants.R2;
+					break;
+				case "R3":
+					instruction += Constants.R3;
+					break;
+				case "R4":
+					instruction += Constants.R4;
+					break;
 			}
 			instruction += toBinary(arr[2]); // +vrijednost
 			return instruction;
@@ -344,10 +344,10 @@ public class Shell {
 	// strane rasporedjivaca
 	public static void saveValues() {
 		int[] registers = {
-			Operations.getRegister(0).value,
-			Operations.getRegister(1).value,
-			Operations.getRegister(2).value,
-			Operations.getRegister(3).value
+				Operations.R1.value, 
+				Operations.R2.value, 
+				Operations.R3.value, 
+				Operations.R4.value
 		};
 		currentlyExecuting.setValuesOfRegisters(registers);
 		currentlyExecuting.setPcValue(Shell.PC);
@@ -357,10 +357,10 @@ public class Shell {
 	// prekida nije ni bilo
 	public static void loadValues() {
 		int[] registers = currentlyExecuting.getValuesOfRegisters();
-		Operations.setRegister(0, registers[0]); // Postavi vrijednost R1 registra
-		Operations.setRegister(1, registers[1]); // Postavi vrijednost R2 registra
-		Operations.setRegister(2, registers[2]); // Postavi vrijednost R3 registra
-		Operations.setRegister(3, registers[3]); // Postavi vrijednost R4 registra
+		Operations.R1.value = registers[0];
+		Operations.R2.value = registers[1];
+		Operations.R3.value = registers[2];
+		Operations.R4.value = registers[3];
 		Shell.PC = currentlyExecuting.getPcValue();
 	}
 }

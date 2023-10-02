@@ -9,11 +9,6 @@ public class Ram {
     private static int[] ram = new int[CAPACITY];
     private static int occupied = 0;
 
-    // Privatni konstruktor za onemogućavanje instanciranja klase
-    private Ram() {
-        // Privatni konstruktor onemogućuje instanciranje klase.
-    }
-
     public static void initialize() {
         // Inicijaliziraj sve ćelije na EMPTY_CELL
         Arrays.fill(ram, EMPTY_CELL);

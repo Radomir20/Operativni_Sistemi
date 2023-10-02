@@ -21,25 +21,10 @@ public class Operations {
 	public static final String dec = "1100";
 	public static final String inc = "1101";
 
-    private static final Register[] registers = {
-        new Register("R1", Constants.R1, 0),
-        new Register("R2", Constants.R2, 0),
-        new Register("R3", Constants.R3, 0),
-        new Register("R4", Constants.R4, 0)
-    };
-
-	public static Register getRegister(int index) {
-		if (index >= 0 && index < registers.length) {
-			return registers[index];
-		}
-		return null;
-	}
-	
-	public static void setRegister(int index, int value) {
-		if (index >= 0 && index < registers.length) {
-			registers[index].value = value;
-		}
-	}
+	public static Register R1 = new Register("R1", Constants.R1, 0);
+	public static Register R2 = new Register("R2", Constants.R2, 0);
+	public static Register R3 = new Register("R3", Constants.R3, 0);
+	public static Register R4 = new Register("R4", Constants.R4, 0);
 
 	public static void store(String reg, String adr) {
 		Register r = getRegister(reg);
@@ -248,26 +233,34 @@ public class Operations {
 	}
 
 	// vraca registar na osnovu adrese registra
-    private static Register getRegister(String adr) {
-        for (Register r : registers) {
-            if (r.getAddress().equals(adr)) {
-                return r;
-            }
-        }
-        return null;
-    }
+	private static Register getRegister(String adr) {
+		switch (adr) {
+		case Constants.R1:
+			return R1;
+		case Constants.R2:
+			return R2;
+		case Constants.R3:
+			return R3;
+		case Constants.R4:
+			return R4;
+		default:
+			return null;
+		}
+	}
 
-    public static void printRegisters() {
-        System.out.println("Registers:");
-        for (Register r : registers) {
-            System.out.println(r.getName() + " value - [ " + r.value + " ]");
-        }
-    }
+	public static void printRegisters() {
+		System.out.println("Registers:");
+		System.out.println("R1 value - [ " + R1.value + " ]");
+		System.out.println("R2 value - [ " + R2.value + " ]");
+		System.out.println("R3 value - [ " + R3.value + " ]");
+		System.out.println("R4 value - [ " + R4.value + " ]");
+	}
 
-    public static void clearRegisters() {
-        for (Register r : registers) {
-            r.value = 0;
-        }
-    }
+	public static void clearRegisters() {
+		R1.value = 0;
+		R2.value = 0;
+		R3.value = 0;
+		R4.value = 0;
+	}
 
 }

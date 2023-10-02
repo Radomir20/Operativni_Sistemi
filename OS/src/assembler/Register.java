@@ -10,16 +10,4 @@ public class Register {
         this.address = address;
         this.value = value;
    }
-
-    public Object getAddress() {
-        return null;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public String getName() {
-        return null;
-    }
 }
